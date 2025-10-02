@@ -108,9 +108,9 @@ const AdminAnnouncements = () => {
       const postData = { title, content, imageUrl };
 
       if (editingId) {
-        await axios.put(`https://http://localhost:3000/api/news/${editingId}`, postData);
+        await axios.put(`https://firetrace-backend.onrender.com/api/news/${editingId}`, postData);
       } else {
-        await axios.post("https://http://localhost:3000/api/news", postData);
+        await axios.post("https://firetrace-backend.onrender.com/api/news", postData);
       }
 
       fetchNews();
@@ -134,7 +134,7 @@ const AdminAnnouncements = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this post?")) return;
     try {
-      await axios.delete(`https://http://localhost:3000/api/news/${id}`);
+      await axios.delete(`https://firetrace-backend.onrender.com/api/news/${id}`);
       fetchNews();
     } catch (err) {
       console.error("Error deleting post:", err);
@@ -155,7 +155,7 @@ const AdminAnnouncements = () => {
     setAnimatingLike(postId);
     try {
       const res = await axios.put(
-        `https://http://localhost:3000/api/news/${postId}/like`,
+        `https://firetrace-backend.onrender.com/api/news/${postId}/like`,
         { userId: currentUserId }
       );
 
@@ -185,7 +185,7 @@ const AdminAnnouncements = () => {
   const viewLikers = async (postId) => {
     try {
       const res = await axios.get(
-        `https://http://localhost:3000/api/news/${postId}/likers`
+        `https://firetrace-backend.onrender.com/api/news/${postId}/likers`
       );
       setLikersList(res.data);
       setShowLikers(true);
