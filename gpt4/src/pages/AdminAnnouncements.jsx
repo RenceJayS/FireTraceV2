@@ -4,6 +4,8 @@ import { FaThumbsUp, FaEdit, FaTrash } from "react-icons/fa";
 import SearchInput from "../components/SearchInput";
 import "../styles/announcements.css";
 
+const API = "https://firetrace-backend.onrender.com/api/news"; // ✅ single base URL
+
 const AdminAnnouncements = () => {
   const [news, setNews] = useState([]);
   const [filteredNews, setFilteredNews] = useState([]);
@@ -22,17 +24,15 @@ const AdminAnnouncements = () => {
   const [likersList, setLikersList] = useState([]);
   const [showCreateModal, setShowCreateModal] = useState(false);
 
-  // Pagination states for recent announcements
+  // Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 4; // show 4 per page
-
-  // Calculate pagination slice
-  const totalPages = Math.ceil((news.length - 1) / pageSize); // minus 1 because main post is excluded
+  const pageSize = 4;
+  const totalPages = news.length > 1 ? Math.ceil((news.length - 1) / pageSize) : 0;
   const startIndex = 1 + (currentPage - 1) * pageSize;
   const endIndex = startIndex + pageSize;
   const paginatedNews = news.slice(startIndex, endIndex);
 
-  // Fetch user
+  // Load user
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
@@ -44,14 +44,14 @@ const AdminAnnouncements = () => {
     }
   }, []);
 
-  // Fetch news posts
+  // Load news
   useEffect(() => {
     fetchNews();
   }, [user]);
 
   const fetchNews = async () => {
     try {
-      const res = await axios.get("https://firetrace-backend.onrender.com/api/news");
+      const res = await axios.get(API);
       setNews(res.data);
       setFilteredNews(res.data);
 
@@ -92,9 +92,8 @@ const AdminAnnouncements = () => {
     setPreview("");
   };
 
-  // Open create modal
   const openCreateModal = () => {
-    resetForm(); // clear any editing data
+    resetForm();
     setShowCreateModal(true);
   };
 
@@ -108,9 +107,9 @@ const AdminAnnouncements = () => {
       const postData = { title, content, imageUrl };
 
       if (editingId) {
-        await axios.put(`https://firetrace-backend.onrender.com/api/news/${editingId}`, postData);
+        await axios.put(`${API}/${editingId}`, postData);
       } else {
-        await axios.post("https://firetrace-backend.onrender.com/api/news", postData);
+        await axios.post(API, postData);
       }
 
       fetchNews();
@@ -134,7 +133,7 @@ const AdminAnnouncements = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this post?")) return;
     try {
-      await axios.delete(`https://firetrace-backend.onrender.com/api/news/${id}`);
+      await axios.delete(`${API}/${id}`);
       fetchNews();
     } catch (err) {
       console.error("Error deleting post:", err);
@@ -154,10 +153,7 @@ const AdminAnnouncements = () => {
 
     setAnimatingLike(postId);
     try {
-      const res = await axios.put(
-        `https://firetrace-backend.onrender.com/api/news/${postId}/like`,
-        { userId: currentUserId }
-      );
+      const res = await axios.put(`${API}/${postId}/like`, { userId: currentUserId });
 
       setNews((prev) =>
         prev.map((post) =>
@@ -184,9 +180,7 @@ const AdminAnnouncements = () => {
 
   const viewLikers = async (postId) => {
     try {
-      const res = await axios.get(
-        `https://firetrace-backend.onrender.com/api/news/${postId}/likers`
-      );
+      const res = await axios.get(`${API}/${postId}/likers`);
       setLikersList(res.data);
       setShowLikers(true);
     } catch (err) {
@@ -231,40 +225,47 @@ const AdminAnnouncements = () => {
             onChange={handleSearchChange}
             placeholder="Search..."
           />
-          <button onClick={openCreateModal} className="create-post-btn">+ Create a Post</button>
+          <button onClick={openCreateModal} className="create-post-btn">
+            + Create a Post
+          </button>
         </div>
       )}
 
-      {/* ✅ User Announcements Layout (only for users) */}
+      {/* ✅ User Announcements Layout */}
       {user?.type === "user" && (
- <div className="announcements-layout">
-  {news.length > 0 ? (
-    <div className="main-announcement">
-      <div className="announcement-card">
-        <h3>{news[0].title}</h3>
-        <p className="content">{news[0].content}</p>
-        {news[0].imageUrl && (
-          <img src={news[0].imageUrl} alt={news[0].title} className="main-img" />
-        )}
-        <div className="announcement-footer">
-          <LikeButton post={news[0]} />
-          <span className="date">{new Date(news[0].createdAt).toLocaleDateString()}</span>
-        </div>
-      </div>
-    </div>
-  ) : (
-    <div className="no-announcement">
-      <p style={{ padding: "20px", textAlign: "left", color: "#666", fontStyle: "italic" }}>No announcements yet.</p>
-    </div>
-  )}
+        <div className="announcements-layout">
+          {news.length > 0 ? (
+            <div className="main-announcement">
+              <div className="announcement-card">
+                <h3>{news[0].title}</h3>
+                <p className="content">{news[0].content}</p>
+                {news[0].imageUrl && (
+                  <img
+                    src={news[0].imageUrl}
+                    alt={news[0].title}
+                    className="main-img"
+                  />
+                )}
+                <div className="announcement-footer">
+                  <LikeButton post={news[0]} />
+                  <span className="date">
+                    {new Date(news[0].createdAt).toLocaleDateString()}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="no-announcement">
+              <p style={{ padding: "20px", textAlign: "left", color: "#666", fontStyle: "italic" }}>
+                No announcements yet.
+              </p>
+            </div>
+          )}
 
-
-
-          {/* ✅ Recent Announcements only show if not empty */}
+          {/* ✅ Recent Announcements */}
           {paginatedNews.length > 0 && (
             <div className="recent-announcements">
               <h4>Recent Announcements</h4>
-
               {paginatedNews.map((item) => (
                 <div key={item._id} className="recent-card">
                   {item.imageUrl && (
@@ -310,7 +311,8 @@ const AdminAnnouncements = () => {
         <div className="modal" onClick={() => setShowLikers(false)}>
           <div className="modal-content-liker" onClick={(e) => e.stopPropagation()}>
             <h3>
-              <FaThumbsUp /> {likersList.length} {likersList.length === 1 ? "Like" : "Likes"}
+              <FaThumbsUp /> {likersList.length}{" "}
+              {likersList.length === 1 ? "Like" : "Likes"}
             </h3>
             {likersList.length > 0 ? (
               <ul>
@@ -323,7 +325,9 @@ const AdminAnnouncements = () => {
             ) : (
               <p>No likes yet.</p>
             )}
-            <button className="modal-close" onClick={() => setShowLikers(false)}>✕</button>
+            <button className="modal-close" onClick={() => setShowLikers(false)}>
+              ✕
+            </button>
           </div>
         </div>
       )}
@@ -333,14 +337,7 @@ const AdminAnnouncements = () => {
         <div className="modal" onClick={() => setShowCreateModal(false)}>
           <div className="modal-content-ps" onClick={(e) => e.stopPropagation()}>
             <h2>{editingId ? "Edit Post" : "Create Post"}</h2>
-            <form
-              className="create-post-form"
-              onSubmit={async (e) => {
-                e.preventDefault();
-                await handleSubmit(e); // ✅ call your submit function
-                window.location.reload(); // ✅ force refresh after success
-              }}
-            >
+            <form className="create-post-form" onSubmit={handleSubmit}>
               <input
                 type="text"
                 placeholder="Title"
@@ -376,7 +373,7 @@ const AdminAnnouncements = () => {
         </div>
       )}
 
-      {/* Admin Table Preview */}
+      {/* Admin Table */}
       {user?.type === "admin" && filteredNews.length > 0 && (
         <div className="admin-table-container">
           <table className="admin-news-table">
@@ -403,10 +400,18 @@ const AdminAnnouncements = () => {
                   <td><LikeButton post={post} /></td>
                   <td>{new Date(post.createdAt).toLocaleDateString()}</td>
                   <td>
-                    <button onClick={() => handleEdit(post)} className="action-btn edit-btn" title="Edit Post">
+                    <button
+                      onClick={() => handleEdit(post)}
+                      className="action-btn edit-btn"
+                      title="Edit Post"
+                    >
                       <FaEdit />
                     </button>
-                    <button onClick={() => handleDelete(post._id)} className="action-btn delete-btn" title="Delete Post">
+                    <button
+                      onClick={() => handleDelete(post._id)}
+                      className="action-btn delete-btn"
+                      title="Delete Post"
+                    >
                       <FaTrash />
                     </button>
                   </td>
