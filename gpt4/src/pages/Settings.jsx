@@ -52,7 +52,7 @@ const [showConfirm, setShowConfirm] = useState(false);
 
         const fetchUser = async () => {
           try {
-            const res = await axios.get(`http://localhost:5000/api/users/${userId}`);
+            const res = await axios.get(`https://firetrace-backend.onrender.com/api/users/${userId}`);
             const user = res.data;
             setFormData({
               name: user.name || "",
