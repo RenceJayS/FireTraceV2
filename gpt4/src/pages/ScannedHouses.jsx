@@ -86,7 +86,7 @@ const handleDelete = async (scanId) => {
 
     (async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/house-risk/all");
+        const res = await axios.get("https://firetrace-backend.onrender.com/api/house-risk/all");
         const storedUser = JSON.parse(localStorage.getItem("user"));
         let houseData = res.data;
 
