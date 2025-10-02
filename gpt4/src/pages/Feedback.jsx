@@ -28,7 +28,7 @@ const Feedback = () => {
   const fetchFeedbackResults = async (storedUser) => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/feedbacks/get?userId=${storedUser._id || storedUser.id}`
+        `https://firetrace-backend.onrender.com/api/feedbacks/get?userId=${storedUser._id || storedUser.id}`
       );
       if (res.ok) {
         const data = await res.json();
