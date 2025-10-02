@@ -1,0 +1,68 @@
+  /* Topbar positioned relative to sidebar (desktop: 260px, mobile: 72px) */
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background-color: white;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    margin-left: 260px; /* default sidebar width */
+    transition: margin-left 0.3s ease;
+  }
+
+  /* Title styling */
+  .topbar-title {
+    font-size: 1.705rem;
+    font-weight: 700;
+    color: #111827;
+    white-space: nowrap;
+  }
+
+
+/* User avatar */
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer; /* indicate clickable */
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+  
+
+
+/* Hover effect */
+.avatar:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  filter: brightness(1.1);
+}
+
+/* Clicked/active effect */
+.avatar:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  filter: brightness(0.95);
+}
+
+  /* Media query for mobile view (collapsed sidebar) */
+@media (max-width: 768px) {
+  .topbar {
+    margin-left: 72px; /* smaller sidebar width */
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .topbar-title {
+    font-size: 1.3rem;
+  }
+
+  .avatar {
+    margin-left: 0; /* remove left margin */
+  }
+}
+

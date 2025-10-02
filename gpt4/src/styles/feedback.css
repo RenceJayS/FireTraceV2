@@ -1,0 +1,296 @@
+/* ===== Common Layout ===== */
+.feedback-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* ===== User Feedback Form ===== */
+.user-feedback-container {
+  max-width: 100%;   /* take full width */
+  padding-left: 55vh;  /* more padding left & right */
+  padding-right: 20vh;  /* more padding left & right */
+  width: 100%;
+  margin: 0 auto;
+}
+
+.user-feedback-card {
+  background: #ffffff;
+  padding: 30px 90px;   /* more padding left & right */
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  width: 100%;          /* make sure it expands */
+}
+
+
+.user-feedback-card h2 {
+  margin-bottom: 15px;
+  
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+  padding-bottom: 15px;
+  padding-top: 20px;
+
+}
+
+/* ===== Feedback Question Row ===== */
+.feedback-question {
+  display: flex;
+  justify-content: space-between; /* text left, stars right */
+  align-items: center;
+  margin: 15px 0;
+  gap: 15px;
+  padding-bottom: 8px;          /* space before line */
+  border-bottom: 1px solid #e0e0e0; /* light grey line */
+}
+
+.feedback-question:last-child {
+  border-bottom: none; /* remove line after last question */
+}
+
+.feedback-question p {
+  margin: 0;
+  font-size: .9rem;
+  font-weight: 500;
+  color: #444;
+  flex: 1;
+  text-align: left;
+}
+
+/* ===== Star Rating ===== */
+.star-rating {
+  display: flex;
+  gap: 6px;
+  font-size: 28px;
+}
+
+.star {
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.25s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.star.filled {
+  color: #FFD700; /* gold */
+}
+
+.star:hover,
+.star.hovered {
+  color: #FFC107; /* brighter gold when hovering */
+  transform: scale(1.2);
+}
+
+/* ===== Textarea ===== */
+.user-feedback-card textarea {
+  width: 100%;
+  height: 80px;
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 1rem;
+  resize: none;
+  margin-top: 20px;
+  transition: border 0.2s ease-in-out;
+}
+
+.user-feedback-card textarea:focus {
+  border-color: #ff9646;
+  outline: none;
+}
+
+/* ===== Submit button ===== */
+.user-feedback-card button {
+  background: #ffac37;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 550;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out, transform 0.2s ease-in-out;
+  width: 30%;
+
+  display: block;        /* makes it block-level */
+  margin: 20px auto 0;   /* centers it horizontally */
+}
+
+.user-feedback-card button:hover {
+  background: #da8814;
+  transform: translateY(-2px);
+}
+
+/* ===== Admin Feedback Results ===== */
+
+
+.admin-feedback-container {
+  min-width: 1520px;
+  min-height: 610px;
+  margin: 0 auto;
+  background-color: #f7f8fc;
+  padding-left: 35vh;
+}
+.no-feedback-text {
+  padding: 20px;
+  text-align: center;
+  color: #666; /* optional */
+  font-style: italic; /* optional */
+}
+
+
+.admin-feedback-card {
+  width: 90%;        /* increased from 70% */
+  background: #fff;
+  padding-top: 60px;     /* increased padding for more space inside */
+  border-radius: 20px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  margin: 0 auto;    /* centers the card horizontally */
+  max-height: 610px;
+}
+
+
+
+
+.table-wrapper {
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+
+.feedback-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.feedback-table th,
+.feedback-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.feedback-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.feedback-table tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+/* Style stars inside admin table */
+.feedback-table td {
+  font-size: 10px;
+  color: #000000; /* gold stars */
+  letter-spacing: 2px;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+
+}
+
+/* ===== Responsive Breakpoints ===== */
+@media (max-width: 600px) {
+  .user-feedback-card {
+    padding: 20px;
+  }
+
+  .user-feedback-card h2 {
+    font-size: 1.4rem;
+  }
+
+  .feedback-question p {
+    font-size: 0.9rem;
+  }
+
+  .star-rating {
+    font-size: 22px;
+  }
+
+  .admin-feedback-card {
+    padding: 20px;
+  }
+
+  .admin-feedback-card h2 {
+    font-size: 1.5rem;
+  }
+
+  .feedback-table th,
+  .feedback-table td {
+    padding: 8px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 992px) {
+  .user-feedback-container {
+  max-width: 100%;   /* take full width */
+  padding-left: 50vh;  /* more padding left & right */
+  padding-right: 20vh;  /* more padding left & right */
+  width: 100%;
+  margin: 0 auto;
+}
+  .admin-feedback-container {
+    max-width: 95%;
+  }
+
+  .admin-feedback-card {
+    padding: 30px;
+  }
+
+  .admin-feedback-card h2 {
+    font-size: 1.8rem;
+  }
+
+  .feedback-table {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1200px) {
+
+  .admin-feedback-container {
+    max-width: 1200px;
+  }
+
+  .admin-feedback-card {
+    padding: 50px;
+  }
+
+  .admin-feedback-card h2 {
+    font-size: 2.2rem;
+  }
+
+  .feedback-table {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1020px) {
+  .user-feedback-container {
+  max-width: 100%;   /* take full width */
+  padding-left: 55vh;  /* more padding left & right */
+  padding-right: 20vh;  /* more padding left & right */
+  width: 100%;
+  margin: 0 auto;
+}
+  .admin-feedback-container {
+    max-width: 1200px;
+  }
+
+  .admin-feedback-card {
+    padding: 50px;
+  }
+
+  .admin-feedback-card h2 {
+    font-size: 2.2rem;
+  }
+
+  .feedback-table {
+    font-size: 16px;
+  }
+}

@@ -1,0 +1,559 @@
+/* ===== Page Wrapper ===== */
+.announcements-page {
+  padding-left: 19rem;
+  padding-right: 2.5rem;
+  padding-bottom: 0.5rem;
+  background-color: #f7f8fc;
+  box-sizing: border-box;
+  min-height: 86vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  
+}
+
+/* ===== Admin Post Form ===== */
+.post-form {
+  background: #ffffff;
+  padding: 40px 50px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto 2rem auto; /* center horizontally with spacing below */
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+
+
+.post-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.post-form select,
+.post-form input[type="text"],
+.post-form textarea,
+.post-form input[type="file"] {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  font-size: 1rem;
+  transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+
+.preview-container img {
+  max-width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* Submit Button */
+.post-form button {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 12px 0;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+
+/* ===== Layout for Announcements ===== */
+.announcements-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .announcements-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Main Announcement ===== */
+.main-announcement .announcement-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.main-announcement .announcement-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.main-announcement h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: #111827;
+}
+
+.main-announcement .content {
+  margin: 0.5rem 0 1rem;
+  color: #374151;
+  line-height: 1.6;
+}
+
+.main-announcement .main-img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 0.5rem;
+  height: 440px;
+  object-fit: cover;
+}
+
+/* ===== Footer ===== */
+.announcement-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #6b7280;
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* ===== Like Button ===== */
+.like-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #000000;
+  transition: transform 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+}
+
+.like-button .heart-icon {
+  font-size: 1.2rem;
+  transition: transform 0.2s ease;
+}
+
+.like-button:hover {
+  transform: scale(1.05);
+  background-color: #fee2e2;
+  color: #ffac37;
+}
+
+.like-button.liked {
+  background-color: #fce9cf;
+  border-color: #ffac37;
+  color: #ffac37;
+}
+
+.like-button.pop .heart-icon {
+  animation: popHeart 0.3s ease forwards;
+}
+
+@keyframes popHeart {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.4); }
+  60% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+/* ===== Recent Announcements ===== */
+.recent-announcements {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.recent-announcements h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #111827;
+}
+
+.recent-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border-bottom: 1px solid #e5e7eb;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  cursor: pointer;
+}
+
+.recent-card:last-child {
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+.recent-card:hover {
+  background-color: #f3f4f6;
+  transform: translateX(4px);
+}
+
+.recent-img {
+  width: 60px;
+  height: 45px;
+  border-radius: 6px;
+  margin-right: 0.75rem;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.recent-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.3;
+}
+
+.recent-date {
+  font-size: 0.8rem;
+  color: #6b7280;
+  display: block;
+  margin-top: 2px;
+}
+
+
+/* ===== Admin Table Preview ===== */
+.admin-table-container {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  padding-top: 0rem;
+  max-height: 75vh;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  overflow-x: auto;
+}
+
+.admin-news-table {
+  width: 100%;
+  border-collapse: collapse;
+  
+}
+
+.admin-news-table th,
+.admin-news-table td {
+  padding: 15px 50px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.admin-news-table th {
+  padding-top: 35px;
+  background-color: #ffffff;
+  color: #111827;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+}
+
+.admin-news-table tr:hover {
+  background-color: #f9fafb;
+}
+
+.admin-news-table img {
+  border-radius: 6px;
+  object-fit: cover;
+  width: 80px;
+  height: 50px;
+}
+
+/* Actions Buttons */
+.admin-news-table button {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-right: 5px;
+  transition: background 0.2s ease;
+}
+
+.admin-news-table button:hover {
+  background-color: #e5e7eb;
+}
+
+/* ===== Modal for Likers ===== */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.modal-content-liker {
+  position: relative;
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 440px;
+  max-height: 70vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.2s ease;
+}
+.modal-content-ps {
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Slide-in animation */
+@keyframes slideIn {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Modal heading */
+.modal-content-ps h2 {
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  color: #333;
+  text-align: center;
+}
+
+/* Form inside modal */
+.create-post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Input and textarea styling */
+.create-post-form input[type="text"],
+.create-post-form textarea,
+.create-post-form input[type="file"] {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.create-post-form input[type="text"]:focus,
+.create-post-form textarea:focus {
+  border-color: #ffac37;
+  outline: none;
+  box-shadow: 0 0 5px rgba(255, 172, 55, 0.5);
+}
+
+/* Submit button */
+.create-post-form button[type="submit"] {
+  background-color: #ffac37;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.create-post-form button[type="submit"]:hover {
+  background-color: #e69b2f;
+}
+
+.create-post-form button[disabled] {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+  /* Image preview */
+.preview-container {
+  margin-top: 5px;
+  text-align: center;
+}
+
+.preview-container p {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.preview-img {
+  max-width: 100%;
+  max-height: 80px;
+  border-radius: 6px;
+  object-fit: contain;
+}
+
+
+.modal-content h3 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.modal-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.modal-content li {
+  padding: 0.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  color: #374151;
+}
+
+.modal-content li:last-child {
+  border-bottom: none;
+}
+
+/* Close Button */
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #6b7280;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.1s ease;
+}
+
+.modal-close:hover {
+  color: #ef4444;
+  transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .post-form {
+    padding: 20px;
+    max-width: 100%;
+  }
+
+  .main-announcement .main-img {
+    height: 300px;
+  }
+
+  .recent-img {
+    width: 50px;
+    height: 40px;
+  }
+
+  .recent-title {
+    font-size: 0.85rem;
+  }
+
+  .recent-date {
+    font-size: 0.75rem;
+  }
+
+  .post-form h2 {
+    font-size: 1.5rem;
+  }
+
+  .admin-news-table th,
+  .admin-news-table td {
+    padding: 10px 8px;
+    font-size: 0.85rem;
+  }
+
+  .admin-news-table img {
+    width: 60px;
+    height: 40px;
+  }
+}
+.search-create-row {
+  display: flex;
+  justify-content: flex-end; /* align everything to the right */
+  align-items: center;
+  width: 100%;
+  gap: 0.5rem; /* space between search input and button */
+  background-color: #f7f8fc;
+}
+
+.search-container {
+  position: relative;
+  flex-grow: 0; /* stop the input from stretching too much */
+  width: 230px; /* fixed width for the search bar */
+}
+
+
+
+.create-post-btn {
+  padding: 10px 20px;
+  font-size: 0.74rem;
+  border-radius: 4px;
+  font-weight: 600;
+  background-color: #ffac37;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+  border: none;           /* removes default border */
+  outline: none;          /* removes the focus outline */
+}
+
+/* Optional: add a custom focus effect for accessibility */
+.create-post-btn:focus {
+  box-shadow: 0 0 0 2px rgba(255, 172, 55, 0.5); /* subtle glow */
+}
+
+
+.create-post-btn:hover {
+  background-color: #e1901f;
+}
+
+/* Admin Table Buttons */
+.action-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.edit-btn {
+  color: #ffac37;
+  margin-right: 5px;
+}
+
+.delete-btn {
+  color: #ffac37;
+}
+
+.table-img {
+  width: 80px;
+  height: 50px;
+  object-fit: cover;
+}
