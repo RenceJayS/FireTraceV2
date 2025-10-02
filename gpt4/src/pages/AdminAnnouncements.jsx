@@ -51,7 +51,7 @@ const AdminAnnouncements = () => {
 
   const fetchNews = async () => {
     try {
-      const res = await axios.get("https://http://localhost:3000/api/news");
+      const res = await axios.get("https://firetrace-backend.onrender.com/api/news");
       setNews(res.data);
       setFilteredNews(res.data);
 
