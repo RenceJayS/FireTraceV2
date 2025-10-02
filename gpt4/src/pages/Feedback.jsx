@@ -69,7 +69,7 @@ const Feedback = () => {
 
     try {
       console.log("Submitting feedback:", payload); // Debug log
-      const res = await fetch("http://localhost:5000/api/feedbacks", {
+      const res = await fetch("https://firetrace-backend.onrender.com/api/feedbacks", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
