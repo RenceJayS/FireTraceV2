@@ -51,7 +51,7 @@ const Dashboard = () => {
 
     const fetchHouses = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/house-risk/all");
+        const res = await axios.get("https://firetrace-backend.onrender.com/api/house-risk/all");
         const data = res.data;
 
         // Group by address & count risks
