@@ -129,7 +129,7 @@ const sendDataToBackend = async (imageUrl, address, coords, riskLevel, gptResult
   const user = JSON.parse(localStorage.getItem("user"));
   
   try {
-    const response = await fetch("http://localhost:5000/api/house-risk/post", {
+    const response = await fetch("https://firetrace-backend.onrender.com/api/house-risk/post", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
