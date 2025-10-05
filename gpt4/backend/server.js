@@ -16,7 +16,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // --- Middleware ---
-app.use(cors({ origin: process.env.CORS_ORIGIN || "https://firetrace-capstone1.onrender.com" }));
+app.use(cors({ origin: process.env.CORS_ORIGIN || "*" }));
 app.use(express.json()); // ✅ Parse JSON bodies
 
 // --- MongoDB Connection ---
