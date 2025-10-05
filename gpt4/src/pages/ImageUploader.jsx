@@ -68,6 +68,8 @@ const ImageUploader = () => {
   const [riskLevel, setRiskLevel] = useState(null);
   const [street, setStreet] = useState("");
   const [houseNumber, setHouseNumber] = useState("");
+    const [showPopup, setShowPopup] = useState(true); // ✅ Popup state
+
 
   const streetOptions = [
     "P. Zamora Street",
@@ -129,7 +131,7 @@ const sendDataToBackend = async (imageUrl, address, coords, riskLevel, gptResult
   const user = JSON.parse(localStorage.getItem("user"));
   
   try {
-    const response = await fetch("https://firetrace-backend.onrender.com/api/house-risk/post", {
+    const response = await fetch("http://localhost:5000/api/house-risk/post", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -325,106 +327,171 @@ const sendDataToBackend = async (imageUrl, address, coords, riskLevel, gptResult
 };
 
 return (
-  <div className="imageupload-container">
-  <Sidebar />
-  <div className="content-area">
-    <div className="upload-container">
-      <main className="main-content" style={{ width: "100%" }}>
-        <div className="upload-layout" style={{ height: "650px", display: "flex", gap: "3rem" }}>
-          <div className="upload-box" tabIndex={0}>
-            <label htmlFor="imageUpload" className="upload-label full-box" style={{ cursor: "pointer" }}>
-              {image ? (
-                <div className="image-preview-wrapper full-box" tabIndex={-1}>
-                  <img src={image} alt="Preview" className="image-preview full-box" />
-                  <p className="upload-note overlay-note">Click to change image</p>
-                </div>
-              ) : (
-                <div className="upload-icon-wrapper full-box" tabIndex={-1}>
-                  <img src={dropImageIcon} alt="Upload" className="upload-icon" />
-                  <p>Upload or Drag and Drop</p>
-                  <p className="upload-note">Use exterior house photos only</p>
-                </div>
-              )}
-              <input
-                type="file"
-                accept="image/*"
-                id="imageUpload"
-                className="hidden"
-                onChange={handleImageChange}
-              />
-            </label>
-          </div>
-
-          <div className="form-section" aria-live="polite">
-            {loading && !result ? (
-              <div className="loading-spinner-container">
-                <div className="spinner"></div>
-                <p className="loading-text">Analyzing image...</p>
-              </div>
-            ) : !result ? (
-              <>
-                <label htmlFor="houseNumber" className="form-label">House Number:</label>
-             <input
-  type="text"
-  id="houseNumber"
-  value={houseNumber}
-  onChange={(e) => setHouseNumber(e.target.value)}
-  placeholder="e.g. 123"
-  autoComplete="off"
-  className="form-input1"
-/>
-
-
-                <label htmlFor="street" className="form-label">Street:</label>
-                <select
-                  id="street"
-                  className="form-input"
-                  value={street}
-                  onChange={(e) => setStreet(e.target.value)}
+<div className="imageupload-container">
+      <Sidebar />
+      <div className="content-area">
+        <div className="upload-container">
+          <main className="main-content" style={{ width: "100%" }}>
+            <div
+              className="upload-layout"
+              style={{ height: "650px", display: "flex", gap: "3rem" }}
+            >
+              <div className="upload-box" tabIndex={0}>
+                <label
+                  htmlFor="imageUpload"
+                  className="upload-label full-box"
+                  style={{ cursor: "pointer" }}
                 >
-                  <option value="">Select Street</option>
-                  {streetOptions.map((streetOption) => (
-                    <option key={streetOption} value={streetOption}>
-                      {streetOption}
-                    </option>
-                  ))}
-                </select>
+                  {image ? (
+                    <div className="image-preview-wrapper full-box" tabIndex={-1}>
+                      <img
+                        src={image}
+                        alt="Preview"
+                        className="image-preview full-box"
+                      />
+                      <p className="upload-note overlay-note">
+                        Click to change image
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="upload-icon-wrapper full-box" tabIndex={-1}>
+                      <img
+                        src={dropImageIcon}
+                        alt="Upload"
+                        className="upload-icon"
+                      />
+                      <p>Upload or Drag and Drop</p>
+                      <p className="upload-note">
+                        Use exterior house photos only
+                      </p>
+                    </div>
+                  )}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    id="imageUpload"
+                    className="hidden"
+                    onChange={handleImageChange}
+                  />
+                </label>
+              </div>
 
-                <button className="scan-btn" onClick={handleSubmit} disabled={loading}>
-                  {loading ? "Analyzing..." : "Analyze Fire Risk"}
-                </button>
+              <div className="form-section" aria-live="polite">
+                {loading && !result ? (
+                  <div className="loading-spinner-container">
+                    <div className="spinner"></div>
+                    <p className="loading-text">Analyzing image...</p>
+                  </div>
+                ) : !result ? (
+                  <>
+                    <label htmlFor="houseNumber" className="form-label">
+                      House Number:
+                    </label>
+                    <input
+                      type="text"
+                      id="houseNumber"
+                      value={houseNumber}
+                      onChange={(e) => setHouseNumber(e.target.value)}
+                      placeholder="e.g. 123"
+                      autoComplete="off"
+                      className="form-input1"
+                    />
 
-                {isValid === false && (
-                  <p className="validation-error">Invalid image uploaded.</p>
-                )}
-              </>
-            ) : (
-              <div className="result-area">
-                {result && (
-                  <div
-                    className={`result-text ${riskLevel ? `risk-${riskLevel.toLowerCase()}` : ""}`}
-                  >
-                    <ReactMarkdown>{result}</ReactMarkdown>
+                    <label htmlFor="street" className="form-label">
+                      Street:
+                    </label>
+                    <select
+                      id="street"
+                      className="form-input"
+                      value={street}
+                      onChange={(e) => setStreet(e.target.value)}
+                    >
+                      <option value="">Select Street</option>
+                      {streetOptions.map((streetOption) => (
+                        <option key={streetOption} value={streetOption}>
+                          {streetOption}
+                        </option>
+                      ))}
+                    </select>
+
+                    <button
+                      className="scan-btn"
+                      onClick={handleSubmit}
+                      disabled={loading}
+                    >
+                      {loading ? "Analyzing..." : "Analyze Fire Risk"}
+                    </button>
+
+                    {isValid === false && (
+                      <p className="validation-error">
+                        Invalid image uploaded.
+                      </p>
+                    )}
+                  </>
+                ) : (
+                  <div className="result-area">
+                    {result && (
+                      <div
+                        className={`result-text ${
+                          riskLevel
+                            ? `risk-${riskLevel.toLowerCase()}`
+                            : ""
+                        }`}
+                      >
+                        <ReactMarkdown>{result}</ReactMarkdown>
+                      </div>
+                    )}
+
+                    {riskLevel && (
+                      <p
+                        className="risk-level"
+                        style={{
+                          color: riskColors[riskLevel],
+                          fontWeight: "bold",
+                          marginTop: "1rem",
+                        }}
+                      >
+                        Detected Fire Risk Level: {riskLevel}
+                      </p>
+                    )}
+
+                    <button
+                      className="scan-btn"
+                      onClick={handleScanAgain}
+                      style={{ marginTop: "1rem" }}
+                    >
+                      Scan Again
+                    </button>
                   </div>
                 )}
+              </div>
+            </div>
 
-                {riskLevel && (
-                  <p className="risk-level" style={{ color: riskColors[riskLevel], fontWeight: "bold", marginTop: "1rem" }}>
-                    Detected Fire Risk Level: {riskLevel}
-                  </p>
-                )}
-
-                <button className="scan-btn" onClick={handleScanAgain} style={{ marginTop: "1rem" }}>
-                  Scan Again
-                </button>
+            {/* ✅ Popup Modal */}
+            {showPopup && (
+              <div className="popup-overlay">
+                <div className="popup-box">
+                  <h2>FireTrace Scan Instructions</h2>
+                  <ul>
+                    <li><b>Show the house clearly -</b> Make sure the image is focused, not blurry.</li>
+                    <li><b>Keep the camera level -</b> Hold your device straight, not tilted, for a clear and balanced view.</li>
+                    <li><b>Use good lighting –</b> Capture during daytime with the light behind you.</li>
+                    <li><b>Avoid filters or edits –</b> Upload only a real, unedited photo.</li>
+                    <li><b>Ensure good quality –</b> Use a clear image with a good resolution</li>
+                  </ul>
+                  <button
+                    className="popup-btn1"
+                    onClick={() => setShowPopup(false)}
+                  >
+                    Got it!
+                  </button>
+                </div>
               </div>
             )}
-          </div>
+          </main>
         </div>
-      </main>
+      </div>
     </div>
-  </div>
-</div>
 
 );
 };
