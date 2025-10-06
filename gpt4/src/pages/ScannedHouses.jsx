@@ -55,7 +55,7 @@ const handleDelete = async (scanId) => {
     const userType = localStorage.getItem("userType");
 
     await axios.delete(
-      `http://localhost:5000/api/house-risk/${scanId}?userId=${userId}&userType=${userType}`
+      `https://firetrace-backend.onrender.com/api/house-risk/${scanId}?userId=${userId}&userType=${userType}`
     );
 
     // update state after successful delete
