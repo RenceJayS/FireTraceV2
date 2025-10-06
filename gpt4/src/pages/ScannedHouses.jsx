@@ -11,7 +11,7 @@ import { MdGridView, MdTableRows } from "react-icons/md";
 const RiskLevelTag = React.memo(({ level }) => {
   const labelMap = {
     high: "🔴 High Risk",
-    medium: "🟡 Medium Risk",
+    moderate: "🟡 Moderate Risk",
     low: "🟢 Low Risk",
   };
   return <strong className="risk-tag">{labelMap[level] || "⚪ Unknown"}</strong>;
