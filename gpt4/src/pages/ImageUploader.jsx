@@ -131,7 +131,7 @@ const sendDataToBackend = async (imageUrl, address, coords, riskLevel, gptResult
   const user = JSON.parse(localStorage.getItem("user"));
   
   try {
-    const response = await fetch("https://firetrace-backend.onrender.com/api/house-risk/post", {
+    const response = await fetch("http://localhost:5000/api/house-risk/post", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -472,12 +472,17 @@ return (
               <div className="popup-overlay">
                 <div className="popup-box">
                   <h2>FireTrace Scan Instructions</h2>
+
                   <ul>
                     <li><b>Show the house clearly -</b> Make sure the image is focused, not blurry.</li>
                     <li><b>Keep the camera level -</b> Hold your device straight, not tilted, for a clear and balanced view.</li>
                     <li><b>Use good lighting –</b> Capture during daytime with the light behind you.</li>
                     <li><b>Avoid filters or edits –</b> Upload only a real, unedited photo.</li>
-                    <li><b>Ensure good quality –</b> Use a clear image with a good resolution</li>
+                    <li><b>Ensure good quality –</b> Use a clear image with a good resolution.</li>
+                    <li><b>File size limit –</b> Upload images less than <b>10 MB</b>.</li>
+                    <li><b>Accepted file types –</b> Only JPG, JPEG, or PNG files are allowed.</li>
+
+
                   </ul>
                   <button
                     className="popup-btn1"
