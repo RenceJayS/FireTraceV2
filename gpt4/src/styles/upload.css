@@ -7,7 +7,6 @@
   max-height: auto;
 }
 
-
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -60,7 +59,6 @@
 .popup-btn1:hover {
   background-color: #ff9501;
 }
-
 
 .upload-container {
   margin-left: 260px;   /* 🔥 same as sidebar width */
