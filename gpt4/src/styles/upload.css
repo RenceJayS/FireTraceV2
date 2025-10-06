@@ -205,9 +205,8 @@
   padding-left: 30px;
   display: flex;
   flex-direction: column;
-  margin: 20px;
   gap: .5rem;
-  max-height: 450px; /* match upload box height */
+  max-height: 520px; /* match upload box height */
   max-width: 500px;
 
   margin-left: auto;   /* 🔥 pushes it to the right side */
@@ -284,21 +283,21 @@
 /* Buttons */
 .scan-btn,
 .scan-again-btn {
-  margin-top: 50px;
-  padding: .8rem 2rem;
+  margin: 50px auto 0; /* top margin 50px, horizontal auto to center */
+  margin-bottom: 5px;
+  padding: 0.8rem 2rem;
   border-radius: 5px;
   background-color: #ffac37;
   color: #fff;
-  font-weight: 600;
+  font-weight: 550;
   font-size: 1rem;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
   user-select: none;
-  box-shadow: 0 4px 10px rgba(0, 0, 5, 0.4);
-
-  align-self: center; /* center inside flex container */
+  display: block; /* needed for margin auto to work */
 }
+
 
 .scan-btn:hover:not(:disabled),
 .scan-again-btn:hover:not(:disabled) {
@@ -318,16 +317,23 @@
   margin-top: 0.5rem;
 }
 
-.result-area {
+  .result-area {
   background-color: #ffffff;
-  max-height: 780px;
+  max-height: 800px;
   font-size: 1.25rem;
-  line-height: 1.6;
   color: #1e293b;
   user-select: text;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  margin-top: 1.5rem;
+  overflow-y: auto;
 }
+
+/* Ensure bullets are visible */
+.result-area ul {
+  padding-left: 1.5rem; /* space for bullets */
+  margin: 0; /* optional: remove default margin */
+  list-style-type: disc; /* ensure bullets are shown */
+}
+
 
 /* Result text and risk */
 .result-text {
