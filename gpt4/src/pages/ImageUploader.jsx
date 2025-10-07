@@ -67,7 +67,7 @@ Always provide a confident and clear classification. Focus 90% on the structure 
 🔸 STRICT OUTPUT FORMAT  
 Respond only with this exact structure — clear, organized, and easy to read.
 
-**Fire Risk Level:** 🟩 / 🟨 / 🟥  
+**Fire Risk Level:** high / moderate / low  
 
 **Observed Fire Hazards:**  
 • **Building Materials:** [clear factual observation]  
